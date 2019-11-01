@@ -1,0 +1,57 @@
+{
+  "name": "af-mongoose-monitor",
+  "version": "1.0.0",
+  "description": "Biblioteca que escuta os eventos do mongoose, e exibe mensagens formatadas no console.",
+  "main": "lib/main.js",
+  "scripts": {
+    "nitro": "echo 'Coffeeeee timeee!'",
+    "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "clear": "rimraf lib",
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
+    "build:watch": "npm run build -- --watch",
+    "test:tdd": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register --watch",
+    "test:coverage": "nyc npm test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maviniciuus/af-mongoose-monitor.git"
+  },
+  "keywords": [
+    "js",
+    "tdd",
+    "library"
+  ],
+  "author": "Marcus Vinicius Mendes Goncalves <marcus@acelera.cloud>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maviniciuus/af-mongoose-monitor/issues"
+  },
+  "homepage": "https://github.com/maviniciuus/af-mongoose-monitor#readme",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-env": "^1.3.2",
+    "babel-register": "^6.24.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^3.0.8",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "af-super-console": "^1.0.0",
+    "braces": "^3.0.2"
+  }
+}
