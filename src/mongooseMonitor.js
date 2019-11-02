@@ -3,6 +3,9 @@ const { SuperConsole } = require('af-super-console');
 class MongooseMonitor {
   constructor(connection) {
     this.connection = connection;
+
+    this.monitor = this.monitor.bind(this);
+    this.dumpStatus = this.dumpStatus.bind(this);
   }
 
   monitor() {
@@ -75,6 +78,46 @@ class MongooseMonitor {
         reason,
       });
     });
+  }
+
+  getStatus() {
+    const { readyState } = this.connection;
+    return readyState;
+  }
+
+  dumpStatus(
+    group = 'DB-CONN',
+    reason = 'Mongoose Connection Status',
+  ) {
+    const readyState = this.getStatus();
+
+    // 0: disconnected
+    if (readyState === 0) {
+      SuperConsole.groupLog({
+        type: 'error', message: 'DISCONNECTED', reason, group,
+      });
+    }
+
+    // 1: connected
+    if (readyState === 1) {
+      SuperConsole.groupLog({
+        type: 'info', message: 'CONNECTED', reason, group,
+      });
+    }
+
+    // 2: connecting
+    if (readyState === 2) {
+      SuperConsole.groupLog({
+        type: 'info', message: 'CONNECTING', reason, group,
+      });
+    }
+
+    // 3: disconnecting
+    if (readyState === 3) {
+      SuperConsole.groupLog({
+        type: 'warning', message: 'DISCONNECTING', reason, group,
+      });
+    }
   }
 }
 

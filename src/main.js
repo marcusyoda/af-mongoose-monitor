@@ -1,5 +1,3 @@
 const MongooseMonitor = require('./mongooseMonitor.js');
 
-module.exports = {
-  MongooseMonitor,
-};
+module.exports = MongooseMonitor;
